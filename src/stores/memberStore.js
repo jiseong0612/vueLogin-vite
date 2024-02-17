@@ -1,25 +1,16 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import axios from 'axios'
 
 export const useMemberStore = defineStore('memberStore', {
   state: ()=>{
     return { 
-      member : {id : 'hth5545', pw: 'wldms1wltjd@'},
+      member : {},
     }
   },
   getters: {
-    doubleCount: (state) => state.count * 2,
+    getId: (state)=> state.member.id,
   },
   actions: {
-    registerMember() {
-      axios.get("/api")
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.error(error);
-      })
-    },
+    
   },
 })

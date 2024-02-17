@@ -1,35 +1,38 @@
 <template>
   <div>
-    <h1>user view</h1>
+    <h1>Login Page</h1>
     <div>
       <div>ID : <input type="text" v-model="id"></div>
       <div>PW : <input type="text" v-model="pw"></div>
-      <button @click="useMemberStore.registerMember">registe</button>
+      <div><input type="checkbox" v-model="rememberMe"> remember Me</div>
+      <button @click="loginMember">Login</button>
+      <button @click="registerMember">register</button>
       <div>
-        {{useMemberStore}}
+        {{memberStore}}
       </div>
+      {{memberStore.member.id}}
     </div>
+    
   </div>
 </template>
 
 <script>
 import { useMemberStore } from '../stores/memberStore.js'
 export default {
-computed: {
-  useMemberStore(){
-    return useMemberStore()
-    }
-  },
   data() {
     return {
       id : '',
       pw : '',
-      //member: useMemberStore()
+      rememberMe: false,
+      memberStore : useMemberStore()
     }
   },
   methods: {
+    loginMember() {
+      this.memberStore.loginMember(this.id, this.pw);
+    },
     registerMember() {
-      useMemberStore().registerMember(this.id, this.pw);
+      this.memberStore.registerMember(this.id, this.pw);
     },
   },
 }

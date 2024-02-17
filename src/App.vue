@@ -13,14 +13,39 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/user">User</RouterLink>
+        <RouterLink to="/login">login</RouterLink>
       </nav>
+      <div v-if="getId">
+        {{getId}}님 환영합니다.
+      </div>
+      <div v-else>
+        <router-link to="/login">로그인 해 주세요.</router-link>
+      </div>
+      {{getId}}
     </div>
   </header>
 
   <RouterView />
 </template>
 
+<script>
+import { mapState } from "pinia";
+import { useMemberStore } from './stores/memberStore'
+export default {
+  computed: {
+    ...mapState(useMemberStore, ["getId"]),
+  },
+  // data(){
+  //   return{
+  //     memberStore : useMemberStore(),
+  //   }
+  // }
+}
+</script>
+
+<style>
+
+</style>
 <style scoped>
 header {
   line-height: 1.5;
